@@ -8,9 +8,12 @@ class Snake {
      * @param {string} prevDirection
      * @param {string} newDirection 
      */
-    changeDirection(direction) {
+    move(prevDirection,newDirection) {
         let segmentHeight = this.body[0].size[0];
         let segmentWidth = this.body[0].size[1];
+        let currentHead = this.body[0];
+        let currentPos = currentHead.position;
+
         let moveNums = [];
         switch(newDirection) {
             case 'up':
@@ -42,8 +45,14 @@ class Snake {
                 }
                 break;
         }
-        this.position_head[0] += moveNums[0];
-        this.position_head[1] += moveNums[1];
+
+        if (this.body.length > 1) {
+            let newHead = this.body.pop();
+        } else {
+            let newHead = currentHead;
+        }
+        newHead.position[0] = currentPos[0] + moveNums[0];
+        newHead.position[1] = currentPos[1] + moveNums[1];
     }
 
 }
